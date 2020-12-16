@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="windows-1252" />
+      <charset value="windows-1254" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,14 +25,14 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="view, table, function" />
-        <schema name="public" object-types="view, sequence, table, function, column" />
+        <schema name="pg_catalog" object-types="table, view, function" />
+        <schema name="public" object-types="table, column, sequence, view, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[--(Atina'nin 7 kez yazildigini asert eder)
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main">--(Atina'nin 7 kez yazildigini asert eder)
 select count(city) as state_count
 from tp_customer
 where city='Athens';
@@ -52,7 +52,7 @@ order by names asc limit 1;
 select name,count(name)
 from tp_state
 group by name
-having count(name)>10;]]></console>
+having count(name)&gt;10;</console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
