@@ -1,11 +1,7 @@
 package gmibank.com.tests;
 
 import gmibank.com.utilities.DatabaseConnector;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
