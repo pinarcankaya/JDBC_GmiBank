@@ -1,6 +1,8 @@
 package gmibank.com.tests;
 
 import gmibank.com.utilities.DatabaseConnector;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.sql.SQLException;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class US_07_Test {
+
 
     SoftAssert softAssert = new SoftAssert();
 
@@ -51,7 +54,7 @@ public class US_07_Test {
             softAssert.assertEquals(w.get("authority_name"),"ROLE_ADMIN");
 
         }softAssert.assertAll();
-        }
+    }
 
     @Test
     public void TC_0703() throws SQLException {
@@ -68,4 +71,5 @@ public class US_07_Test {
         }softAssert.assertAll();
 
     }
-    }
+}
+
