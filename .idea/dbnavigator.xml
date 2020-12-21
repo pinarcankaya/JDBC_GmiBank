@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="windows-1254" />
+      <charset value="windows-1252" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,21 +25,21 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="table, function, view" />
-        <schema name="public" object-types="table, constraint, index, sequence, function, column, view, dataset trigger" />
+        <schema name="pg_catalog" object-types="function, table, view" />
+        <schema name="public" object-types="constraint, sequence, function, column, index, table, dataset trigger, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT id, login, email, activation_key
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main">SELECT id, login, email, activation_key
 FROM jhi_user
 WHERE activation_key IS NOT NULL;
 ORDER BY id ASC;
 SELECT *
 FROM jhi_user_authority
 WHERE authority_name='ROLE_ADMIN'
-ORDER BY user_id DESC;]]></console>
+ORDER BY user_id DESC;</console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />

@@ -2,6 +2,7 @@ package gmibank.com.tests;
 
 
 import gmibank.com.utilities.DatabaseConnector;
+import gmibank.com.utilities.DatabaseConnector2;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -33,14 +34,14 @@ public class US_04_Test {
 
     @AfterMethod
     public void test() {
-        DatabaseConnector.closeConnection();
+        DatabaseConnector2.closeConnection();
     }
 
     @Test
     public void tc0401() throws SQLException {
         String queryDataResult ="";
-        DatabaseConnector.executeInsertQuery(insertQueryTc0401);
-        resultSet = DatabaseConnector.getResultSet(queryTC0401);
+        DatabaseConnector2.executeInsertQuery(insertQueryTc0401);
+        resultSet = DatabaseConnector2.getResultSet(queryTC0401);
         while (resultSet.next()) {
             queryDataResult = resultSet.getString("name");
             System.out.println(queryDataResult);
@@ -50,15 +51,15 @@ public class US_04_Test {
         @Test
     public void tc0402(){
         List<Map<String,String>> myDataList;
-        DatabaseConnector.executeInsertQuery(insertQueryTc0402);
-        myDataList = DatabaseConnector.getQueryResultWithAListMap(queryTC0402);
+        DatabaseConnector2.executeInsertQuery(insertQueryTc0402);
+        myDataList = DatabaseConnector2.getQueryResultWithAListMap(queryTC0402);
         Assert.assertEquals(myDataList.get(0).get("id"),"201");
         Assert.assertEquals(myDataList.get(0).get("login"),"DB");
         }
         @Test
     public void tc0403() throws SQLException {
-        DatabaseConnector.executeInsertQuery(insertQueryTc0403);
-        resultSet = DatabaseConnector.getResultSet(queryTC0403);
+        DatabaseConnector2.executeInsertQuery(insertQueryTc0403);
+        resultSet = DatabaseConnector2.getResultSet(queryTC0403);
         while (resultSet.next()){
             Assert.assertEquals(resultSet.getString("id"),"11");
             Assert.assertEquals(resultSet.getString(2),"japonya");

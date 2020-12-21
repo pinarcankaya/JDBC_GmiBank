@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseConnectorSamet {
+public class DatabaseConnector2 {
 
     private static final String dbusername = ConfigurationReader.getProperty("username");
     private static final String dbpassword = ConfigurationReader.getProperty("password");
