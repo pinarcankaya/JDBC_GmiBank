@@ -25,18 +25,46 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="function, view, table" />
-        <schema name="public" object-types="function, view, table" />
+        <schema name="pg_catalog" object-types="function, table, view" />
+        <schema name="public" object-types="function, column, table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[select count(activated)
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[------tc0401------
+select *
+from tp_state
+where "id"=88;
+
+delete from tp_state
+where id=88;
+
+insert into tp_state values (88,'Ankara',1);
+
+-------------tc0402------------------------
+select *
 from jhi_user
-join jhi_user_authority
-on jhi_user.id=jhi_user_authority.user_id
-where  authority_name='ROLE_ADMIN' and activated='false';]]></console>
+where "id"=201;
+
+insert into jhi_user ("id","login",password_hash,first_name,last_name,activated,created_by)
+            values (201,'DB','abc123','Ali','Adiguzel',true,'Veli');
+            
+delete from jhi_user
+where "id"=201;            
+------------tc0403-----------------------------
+select *
+from tp_country
+where "id"=11;
+
+delete from tp_country
+where "id"=11;
+
+insert into tp_country values (11,'japonya');
+
+update tp_country
+set name='japonya'
+where "id"=11;]]></console>
     </connection>
     <connection id="62632466-4fe2-48b4-b0e5-b754b852f3cf">
       <console name="Connection" type="STANDARD" schema="" session="Main" />

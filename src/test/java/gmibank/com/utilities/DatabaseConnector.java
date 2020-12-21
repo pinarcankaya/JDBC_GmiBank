@@ -17,6 +17,8 @@ public class DatabaseConnector {
     private static Statement statement;
     private static ResultSet resultSet;
     private static ResultSetMetaData rsmd;
+    private static PreparedStatement preparedStatement;
+    private static ResultSetMetaData metaData;
 
 
     public static ResultSet getResultSet(String query) {
@@ -115,7 +117,90 @@ public class DatabaseConnector {
         String query="SELECT * FROM public.jhi_user; ";
         return getQueryAsAListOfMaps(query).get(0);
     }
+    // ============ Create connection to the DB =============== //
+    public static Connection createConnection() {
+        try {
+            connection = DriverManager.getConnection(connectionUrl,dbusername,dbpassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+    // ============= insert a row =============== //
+    //----yeni bir satir eklemek icin kullanilan method----//
+    public static void executeInsertQuery(String insertQuery) {
+        createConnection();
+        try {
+            preparedStatement = connection.prepareStatement(insertQuery);
+            // Asagidaki yorumda olan kismi insert edeceginiz dataya uygun duzenleyiniz.
+            //preparedStatement.setInt(1,15);
+            //preparedStatement.setString(2,"Ankara");
+//            preparedStatement.setInt(3,01);
+//            preparedStatement.setInt(1, 2);
+//            preparedStatement.setString(2,"Houston Insert");
+//            preparedStatement.setObject(3, null);
+            //preparedStatement.execute();
+            int row  = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            System.out.println("Affected row: " + row);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // ==============  get a list map of the query result ============== //
+    //  --------yapilan sorguyu bir list icinde aldigimiz method-------
+    //ornek: myDataList.get(0).get("id").....ilk index.teki "id"yi getir..
+    public static List<Map<String,String>> getQueryResultWithAListMap(String query) {
+        resultSet = executeQuery(query);
+        List<Map<String,String>> allResultListMap = new ArrayList<>();
+        try {
+            metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            List<String> allColumnName = getAllColumnNameWithResultSet(resultSet);
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+                Map<String,String> row = new HashMap<>();
+                for (int i = 0; i < columnCount ; i++) {
+                    row.put(allColumnName.get(i),resultSet.getString(allColumnName.get(i)));
+                }
+                allResultListMap.add(row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allResultListMap;
+    }
+    // =========== get Resultset with query =========== //
+    //  yapilan sorgulamayi RESULTSET olarak return eden method.
+    public static ResultSet executeQuery(String query) {
+
+        createConnection();
+        try {
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(query + ": query did not successfully execute!" );
+        }
+        return resultSet;
+    }
+    // ============== get all column name with ResultSet =========== //
+    // metadata ile column isimlerini bir listeye ekledigimiz method.
+    public static List<String> getAllColumnNameWithResultSet(ResultSet resultSetForColName) {
+        List<String> listOfColumnName = new ArrayList<>();
+        try {
+            metaData = resultSetForColName.getMetaData();
+            for (int i = 1; i <= metaData.getColumnCount() ; i++) {
+                listOfColumnName.add(metaData.getColumnName(i));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return  listOfColumnName;
+    }
 
 
     public static void closeConnection() {
