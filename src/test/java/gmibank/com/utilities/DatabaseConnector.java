@@ -116,6 +116,33 @@ public class DatabaseConnector {
         return getQueryAsAListOfMaps(query).get(0);
     }
 
+    public static Connection createConnection() {
+        try {
+            connection = DriverManager.getConnection(connectionUrl,dbusername,dbpassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+
+    public static void executeInsertQuery(String insertQuery) {
+        createConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+//            preparedStatement.setInt(1, 2);
+//            preparedStatement.setString(2,"Houston Insert");
+//            preparedStatement.setObject(3, null);
+            int row  = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            System.out.println("Affected row: " + row);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void closeConnection() {
         try {

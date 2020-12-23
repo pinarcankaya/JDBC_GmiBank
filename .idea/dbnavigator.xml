@@ -25,8 +25,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="function, view, table" />
-        <schema name="public" object-types="function, view, table" />
+        <schema name="pg_catalog" object-types="table, function, view" />
+        <schema name="public" object-types="table, function, sequence, view, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,7 +36,15 @@
 from jhi_user
 join jhi_user_authority
 on jhi_user.id=jhi_user_authority.user_id
-where  authority_name='ROLE_ADMIN' and activated='false';]]></console>
+where  authority_name='ROLE_ADMIN' and activated='false';
+
+select *
+from tp_state;
+where id=123;
+
+Update tp_state 
+Set name = 'ABC'
+where id = 15;]]></console>
     </connection>
     <connection id="62632466-4fe2-48b4-b0e5-b754b852f3cf">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -662,7 +670,7 @@ where  authority_name='ROLE_ADMIN' and activated='false';]]></console>
       <transactions>
         <uncommitted-changes>
           <on-project-close value="ASK" />
-          <on-disconnect value="ASK" />
+          <on-disconnect value="COMMIT" />
           <on-autocommit-toggle value="ASK" />
         </uncommitted-changes>
         <multiple-uncommitted-changes>
