@@ -36,14 +36,13 @@ public class US_04_Test {
     public void test04() throws SQLException {
         String query = "SELECT *  FROM tp_state WHERE id =15";
         System.out.println(DatabaseConnector.getQueryAsAListOfMaps(query));
-
         DatabaseConnector.closeConnection();
-
         ResultSet resultSet = DatabaseConnector.getResultSet(query);
 
         while (resultSet.next()) {
             System.out.println(resultSet.getString("name"));
         }
+
         DatabaseConnector.closeConnection();
     }
 }
