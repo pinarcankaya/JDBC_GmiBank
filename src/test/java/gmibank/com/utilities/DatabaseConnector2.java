@@ -120,8 +120,8 @@ public class DatabaseConnector2 {
             // Asagidaki yorumda olan kismi insert edeceginiz dataya uygun duzenleyiniz.
 
 //            preparedStatement.setInt(1, 2);
-//            preparedStatement.setString(2,"Houston Insert");
-//            preparedStatement.setObject(3, null);
+//            preparedStatement.setString(2,"Ankara");
+//            preparedStatement.setInt(3, 1);
 
             int row  = preparedStatement.executeUpdate();
             preparedStatement.close();

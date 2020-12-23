@@ -36,7 +36,8 @@ public class US_04_Test {
     public void test() {
         DatabaseConnector2.closeConnection();
     }
-
+    //"Id = 15 , name = Ankara, tpcountryid = 01"  After add these data to tp_state stable then assert that
+    // existance of the data (Verilen datayi ekledikten sonra datanin varligini assert ediniz.)
     @Test
     public void tc0401() throws SQLException {
         String queryDataResult ="";
@@ -48,6 +49,9 @@ public class US_04_Test {
         }
         Assert.assertEquals(queryDataResult,"Ankara");
         }
+    //id=201, login=DB ,password_hash= abc123, first_name= Ali ,last_name=Adiguzel ,activated = true,
+    // created_by= Veli  //  add these data to jhi_user table then assert that existance of the data
+    // (Verilen datayi ekledikten sonra datanin varligini assert ediniz.)
         @Test
     public void tc0402(){
         List<Map<String,String>> myDataList;
@@ -56,6 +60,8 @@ public class US_04_Test {
         Assert.assertEquals(myDataList.get(0).get("id"),"201");
         Assert.assertEquals(myDataList.get(0).get("login"),"DB");
         }
+    //id = 11  // add this data to tp_country table then assert that existance
+    // of the data (Verilen datayi ekledikten sonra datanin varligini assert ediniz.)
         @Test
     public void tc0403() throws SQLException {
         DatabaseConnector2.executeInsertQuery(insertQueryTc0403);
