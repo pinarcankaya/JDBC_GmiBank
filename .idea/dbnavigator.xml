@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="windows-1252" />
+      <charset value="UTF-8" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,8 +25,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="view, table, function" />
-        <schema name="public" object-types="view, table, function" />
+        <schema name="pg_catalog" object-types="function, view, table" />
+        <schema name="public" object-types="function, sequence, view, table, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -81,7 +81,18 @@ where "id"=1788;
 insert into tp_country values (1788,'japonya');
 
 delete from tp_country
-where id = 1788;]]></console>
+where id = 1788;
+
+select first_name, last_name,city from tp_customer where first_name like 'R%' and  last_name like '_a%' and city like 'Sa%' ;
+
+select id,city ,user_id from tp_customer where id>40000 and city !='Athens'and user_id>5 order by id Desc limit 20; -- birin query 
+
+select * from tp_account;
+select balance,id, account_status_type  
+from tp_account where balance =5000 and account_status_type='ACTIVE' 
+Order by id Asc limit 20;--
+
+select * from jhi_user;]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
