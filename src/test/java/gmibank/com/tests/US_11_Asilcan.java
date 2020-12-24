@@ -1,10 +1,13 @@
 package gmibank.com.tests;
 
 import gmibank.com.utilities.DatabaseConnector;
+import gmibank.com.utilities.DatabaseConnector2;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -55,10 +58,43 @@ public class US_11_Asilcan {
         softAssert.assertEquals(actual,20);
         softAssert.assertAll();
 
+    }
+
+    @Test
+    public void TC_1103(){
+        /*"anonymousUser" tarafindan create(created_by) edilmis ilk kisinin "authority_name" 'inin "ROLE_CUSTOMER",
+            "team18_admin" tarafindan create(created_by) edilmis ilk kisinin "authority_name" 'inin "ROLE_ADMIN","
+                  admin" tarafindan create(created_by) edilmis ilk kisinin "authority_name" 'inin "ROLE_EMPLOYEE" oldugunu dogrulayiniz.
+         */
+
+        String adminrole[]={"anonymousUser","team18_admin","admin"};
+
+        String adminrole2[]={"ROLE_CUSTOMER","ROLE_ADMIN","ROLE_EMPLOYEE"};
+        String query="";
+
+        for(int i=0; i<adminrole.length; i++){
+
+           query="select created_by ,authority_name \n" +
+                    "from jhi_user \n" +
+                    "join jhi_user_authority \n" +
+                    "on jhi_user.id=jhi_user_authority.user_id\n" +
+                    "where created_by='"+adminrole[i]+"' limit 1;";
+
+            //System.out.println(query);
+
+            List<Map<String ,String >> mapquery= DatabaseConnector2.getQueryResultWithAListMap(query);
+            System.out.println(mapquery.get(0).values());
+            softAssert.assertTrue(mapquery.get(0).containsValue(adminrole2[i]));
+
+
+        }
+
+
+        softAssert.assertAll();
+
 
 
 
 
     }
-
 }

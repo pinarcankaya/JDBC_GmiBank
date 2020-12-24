@@ -92,7 +92,46 @@ select balance,id, account_status_type
 from tp_account where balance =5000 and account_status_type='ACTIVE' 
 Order by id Asc limit 20;--
 
-select * from jhi_user;]]></console>
+
+
+Select * from jhi_persistent_audit_event 
+where event_id>44500 and principal='group8user' 
+and event_type='AUTHENTICATION_FAILURE';
+
+update jhi_persistent_audit_event 
+set event_type='HATA'
+where event_id>44500 
+and principal='group8user' and event_type='AUTHENTICATION_FAILURE';
+
+select * from jhi_user_authority
+
+select *from jhi_user where created_by='anonymousUser' limit 1;
+
+select * from jhi_user_authority;
+
+
+select created_by ,authority_name 
+from jhi_user 
+join jhi_user_authority 
+on jhi_user.id=jhi_user_authority.user_id
+where created_by='team18_admin' limit 1
+
+
+Select * from tp_customer;
+
+Select count(city) from tp_customer
+where city !='Athens' and user_id>5 and id>40000;
+
+select * from tp_account;
+
+
+select balance,account_status_type 
+from tp_account 
+where balance=5000 and account_status_type='ACTIVE' limit 40;
+
+select created_by,authority_name from jhi_user
+join jhi_user_authority on jhi_user.id=jhi_user_authority.user_id 
+where created_by='admin' and authority_name='ROLE_EMPLOYEE' limit 1 ;]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
