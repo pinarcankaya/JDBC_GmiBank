@@ -26,7 +26,7 @@
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
         <schema name="pg_catalog" object-types="table, function, view" />
-        <schema name="public" object-types="sequence, table, function, column, view" />
+        <schema name="public" object-types="table, dataset trigger, constraint, function, index, column, view, sequence" />
       </connection>
     </loaded-nodes>
   </component>
@@ -130,11 +130,31 @@ Limit 1;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/tp_customer" />
+      <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/jhi_user" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155" />
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_persistent_audit_evt_data" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_persistent_audit_event" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_account" active-filter-id="EMPTY_FILTER">
+      <filter id="6a32e614-c9da-4883-baec-6a3b6d241637" name="Filter" temporary="false" custom-name="false" type="custom">
+        <condition />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_customer" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_country" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_employee" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_customer_account" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tpaccount_registration" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_state" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user_authority" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
