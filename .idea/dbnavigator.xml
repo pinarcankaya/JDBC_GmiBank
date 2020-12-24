@@ -131,7 +131,11 @@ where balance=5000 and account_status_type='ACTIVE' limit 40;
 
 select created_by,authority_name from jhi_user
 join jhi_user_authority on jhi_user.id=jhi_user_authority.user_id 
-where created_by='admin' and authority_name='ROLE_EMPLOYEE' limit 1 ;]]></console>
+where created_by='admin' and authority_name='ROLE_EMPLOYEE' limit 1 ;
+
+
+select count("state") from tp_customer
+left join jhi_user on tp_customer.user_id=jhi_user."id" where "state" in ('USA','Miami');]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
