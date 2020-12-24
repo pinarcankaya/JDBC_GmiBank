@@ -32,7 +32,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[----------tc0401-------------------------
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main">----------tc0401-------------------------
 select *
 from tp_state;
 
@@ -48,7 +48,7 @@ Set name = 'yozgat'
 where id = 88;
 
 update tp_state
-set "name" = 'deneme'
+set &quot;name&quot; = 'deneme'
 where id = 15;
 
 insert into tp_state values (88,'Ankara', 1);
@@ -61,9 +61,9 @@ from jhi_user;
 
 select *
 from jhi_user
-where "id"=661;
+where &quot;id&quot;=661;
 
-insert into jhi_user ("id","login",password_hash,first_name,last_name,activated,created_by)
+insert into jhi_user (&quot;id&quot;,&quot;login&quot;,password_hash,first_name,last_name,activated,created_by)
             values  (661,'manisa','abc23','Ali','Adiguzel',true,'Veli');
             
 delete from jhi_user
@@ -76,66 +76,54 @@ from tp_country
 
 select *
 from tp_country
-where "id"=1788;
+where &quot;id&quot;=1788;
 
 insert into tp_country values (1788,'japonya');
 
 delete from tp_country
 where id = 1788;
 
-select first_name, last_name,city from tp_customer where first_name like 'R%' and  last_name like '_a%' and city like 'Sa%' ;
+----------------- us_08 ------------------
 
-select id,city ,user_id from tp_customer where id>40000 and city !='Athens'and user_id>5 order by id Desc limit 20; -- birin query 
+select *
+from jhi_persistent_audit_event
+WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
 
-select * from tp_account;
-select balance,id, account_status_type  
-from tp_account where balance =5000 and account_status_type='ACTIVE' 
-Order by id Asc limit 20;--
+select *
+from jhi_persistent_audit_evt_data;
 
+select event_type
+from jhi_persistent_audit_event
+WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
 
-
-Select * from jhi_persistent_audit_event 
-where event_id>44500 and principal='group8user' 
-and event_type='AUTHENTICATION_FAILURE';
-
-update jhi_persistent_audit_event 
-set event_type='HATA'
-where event_id>44500 
-and principal='group8user' and event_type='AUTHENTICATION_FAILURE';
-
-select * from jhi_user_authority
-
-select *from jhi_user where created_by='anonymousUser' limit 1;
-
-select * from jhi_user_authority;
+select account_type,count (account_type) as total_account_type, avg   (balance) 
+from tp_account
+group by account_type
+ORDER BY avg (balance)  DESC
+LIMIT 1;
 
 
-select created_by ,authority_name 
-from jhi_user 
-join jhi_user_authority 
-on jhi_user.id=jhi_user_authority.user_id
-where created_by='team18_admin' limit 1
+SELECT * 
+FROM jhi_persistent_audit_event
+WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE';
 
+UPDATE jhi_persistent_audit_event
+SET event_type = 'HATA'
+WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE'
 
-Select * from tp_customer;
+SELECT * 
+FROM jhi_persistent_audit_event
+WHERE event_id&gt;44500 and principal ='group8user' and event_type !='AUTHENTICATION_SUCCESS';
 
-Select count(city) from tp_customer
-where city !='Athens' and user_id>5 and id>40000;
+SELECT *
+from jhi_persistent_audit_evt_data
+where value ='Bad credentials' and event_id = 56196;
 
-select * from tp_account;
-
-
-select balance,account_status_type 
-from tp_account 
-where balance=5000 and account_status_type='ACTIVE' limit 40;
-
-select created_by,authority_name from jhi_user
-join jhi_user_authority on jhi_user.id=jhi_user_authority.user_id 
-where created_by='admin' and authority_name='ROLE_EMPLOYEE' limit 1 ;
-
-
-select count("state") from tp_customer
-left join jhi_user on tp_customer.user_id=jhi_user."id" where "state" in ('USA','Miami');]]></console>
+select account_type, count (account_type) as account_count, avg (balance) 
+from tp_account
+group by account_type
+order by avg (balance)  DESC
+Limit 1;</console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />

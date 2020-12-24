@@ -141,7 +141,7 @@ public class DatabaseConnector2 {
             preparedStatement = connection.prepareStatement(updateQuery);
             // Asagidaki yorumda olan kismi update edeceginiz dataya uygun duzenleyiniz.
 
-          preparedStatement.setString(1 ,"HATA"); // 1. ? yerine
+//          preparedStatement.setString(1 ,"HATA"); // 1. ? yerine
             //preparedStatement.setInt(1,1); //2. ? yerine
             //preparedStatement.executeUpdate();
 
@@ -181,7 +181,7 @@ public class DatabaseConnector2 {
             // Asagidaki yorumda olan kismi update edeceginiz dataya uygun duzenleyiniz.
 
             //preparedStatement.setString(1 ,"4958"); // 1. ? yerine
-            preparedStatement.setInt(1,49458); //2. ? yerine
+//            preparedStatement.setInt(1,49458); //2. ? yerine
             preparedStatement.executeUpdate();
 
             int row  = preparedStatement.executeUpdate();
