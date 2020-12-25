@@ -25,105 +25,127 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="table, function, view" />
-        <schema name="public" object-types="table, dataset trigger, constraint, function, index, column, view, sequence" />
+        <schema name="information_schema" object-types="constraint, function, view, index, table, column, dataset trigger, sequence" />
+        <schema name="pg_catalog" object-types="function, view, table" />
+        <schema name="public" object-types="constraint, function, view, index, table, column, dataset trigger, sequence" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[----------tc0401-------------------------
-select *
-from tp_state;
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[select count(activated)
+from jhi_user
+join jhi_user_authority
+on jhi_user.id=jhi_user_authority.user_id
+where  authority_name='ROLE_ADMIN' and activated='false';
 
-select *
-from tp_state
-where id=88;
 
-delete from tp_state
-where id=88;
+-----------------------------us11
+select sum (balance)
+from tp_account;
 
-update tp_state 
-Set name = 'yozgat'
-where id = 88;
+--id si 40000 den yüksek olan ve cty si st Louis olmayan user larin 5 ten büyük user id  ye sahip olanlari bulalim tp_customer
 
-update tp_state
-set "name" = 'deneme'
-where id = 15;
+select count (user_id) as user_id_50000_den_buyuk
+from tp_customer
+where user_id>50000 and id>40000 and city != 'Athens';
 
-insert into tp_state values (88,'Ankara', 1);
-------------------tc0402-----------------------------------
---id=201, login=DB ,password_hash= abc123, first_name= Ali ,last_name=Adiguzel ,
---activated = true, created_by= Veli  //
- 
-select *
-from jhi_user;
+--tp_account tablosunda balance id leri ayni olan müsterilerden ilk 40 kisinin tümünün account status type nin ACTIVE oldugunu dogrulayiniz.
+
+select account_status_type
+from tp_account
+where balance =5000 limit 40;
+
+
+select authority_name
+from jhi_user_authority
+join jhi_user
+on jhi_user.id=jhi_user_authority.user_id 
+where created_by='admin' limit 5;
 
 select *
 from jhi_user
-where "id"=661;
+join tp_customer
+on jhi_user.id=tp_customer.user_id
+where first_name like 'R%';
 
-insert into jhi_user ("id","login",password_hash,first_name,last_name,activated,created_by)
-            values  (661,'manisa','abc23','Ali','Adiguzel',true,'Veli');
-            
-delete from jhi_user
-where id=661;
+--(tp_customer)id si 40000 den yüksek olan ve city si Athens olmayan userlardan, 5 ten büyük user_id  ye sahip olanlarin 67 kisi oldugunu bulun
 
--------------------------tc0403-------------------------------------
+
+select count(first_name)
+from tp_customer
+where id>40000 and city!='Athens' and user_id>5;
+
+
+
+select created_by,authority_name 
+from jhi_user
+join jhi_user_authority
+on jhi_user.id=jhi_user_authority.user_id
+where created_by ='anonymousUser' limit 1; //ROLE_CUSTOMER
+
+
+select created_by,authority_name
+from jhi_user
+join jhi_user_authority
+on jhi_user.id=jhi_user_authority.user_id
+where created_by='team18_admin' limit 1; //ROLE_ADMIN
+
+select created_by,authority_name
+from jhi_user
+join jhi_user_authority
+on jhi_user.id=jhi_user_authority.user_id
+where created_by='admin' limit 1; //ROLE_EMPLOYEE
+-----------------------------------------------
+--us01
+
+
+
+
+-- tc01 R ile baslayan isim ve ikinci  karakteri  a olan  soy isim sayisinin 45 den buyuk fazla olup olmadigini ve  sehirilerinin de Sakarya  oldugunu verify ediniz.
+select city
+from tp_customer
+where first_name like 'R%' and last_name like '_a%';
+
+select 
+
+-- tc02  Tp_costumer ve jdhi_user tablolarindaki kisilerin data olusturma tarihini ve isimlerini. ulkeri USA ve miami olanlarin sayisinin 5 den buyuk oldugunu veriye ediniz.
+select *
+from jhi_user
+join tp_customer on tp_customer.user_id=jhi_user."id"
+where "state" in ('USA','Miami');
+
+
+select count (create_date)
+from jhi_user
+join tp_customer on jhi_user.id=tp_customer.user_id;
+
+--tc03 tp_costomer tablsounun id sinin 40000 den az olanlarin listesini ve 
+--sayisini ve sehir isimlerinin sonu is ile bitenlerin sayiliarini bulan kodu yaziniz
+select *
+from tp_customer
+where id<40000 and city like '%is';
+
+--tp_costumer of firstname and lastname and email also zip_code should habe being select and from tp_state name should select 
+--then after both of them join in order to see zipcode =10433 and 25000 and 456 and how many are there in the table.
+
+
+select first_name,last_name,email,zip_code 
+from tp_customer 
+where zip_code in ('10433','25000','456');
 
 select *
-from tp_country
+from tp_customer inner join tp_state on tp_state.id = tp_customer.country_id
+where zip_code in ('10433','25000','456');
 
-select *
-from tp_country
-where "id"=1788;
-
-insert into tp_country values (1788,'japonya');
-
-delete from tp_country
-where id = 1788;
-
------------------ us_08 ------------------
-
-select *
-from jhi_persistent_audit_event
-WHERE event_id > 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-select *
-from jhi_persistent_audit_evt_data;
-
-select event_type
-from jhi_persistent_audit_event
-WHERE event_id > 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-select account_type,count (account_type) as total_account_type, avg   (balance) 
-from tp_account
-group by account_type
-ORDER BY avg (balance)  DESC
-LIMIT 1;
+--serbest calisma:tp_
+--tp_customer dan first_name inin ilk harfi C olan son harfi n olan ikicin harfi a veya i olan 3 harfli isimlere sahip müsterilerin sayisi
 
 
-SELECT * 
-FROM jhi_persistent_audit_event
-WHERE event_id>44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE';
 
-UPDATE jhi_persistent_audit_event
-SET event_type = 'HATA'
-WHERE event_id>44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE'
-
-SELECT * 
-FROM jhi_persistent_audit_event
-WHERE event_id>44500 and principal ='group8user' and event_type !='AUTHENTICATION_SUCCESS';
-
-SELECT *
-from jhi_persistent_audit_evt_data
-where value ='Bad credentials' and event_id = 56196;
-
-select account_type, count (account_type) as account_count, avg (balance) 
-from tp_account
-group by account_type
-order by avg (balance)  DESC
-Limit 1;]]></console>
+select first_name
+from tp_customer
+where first_name like 'J[a-i]n';]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -131,8 +153,9 @@ Limit 1;]]></console>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/tp_customer" />
+      <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/tp_account" />
       <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/jhi_user" />
+      <object connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" object-ref="schemas/public/tables/tp_customer" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
@@ -141,7 +164,6 @@ Limit 1;]]></console>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_persistent_audit_evt_data" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_persistent_audit_event" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_account" active-filter-id="EMPTY_FILTER">
       <filter id="6a32e614-c9da-4883-baec-6a3b6d241637" name="Filter" temporary="false" custom-name="false" type="custom">
         <condition />
@@ -149,10 +171,13 @@ Limit 1;]]></console>
     </filter-actions>
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_customer" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_country" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_employee" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_customer_account" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tpaccount_registration" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_state" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_authority" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_persistent_audit_event" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="information_schema.sql_packages" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.tp_employee" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user_authority" active-filter-id="EMPTY_FILTER" />
   </component>
