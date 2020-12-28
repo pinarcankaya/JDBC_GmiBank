@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="UTF-8" />
+      <charset value="windows-1252" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,105 +25,67 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="function, view, table" />
-        <schema name="public" object-types="function, sequence, view, table, column" />
+        <schema name="pg_catalog" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, column, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main">----------tc0401-------------------------
-select *
-from tp_state;
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[-- // 1--tp_account tablosunda id 3000 den kucuk  kisilerin account_type sadece saving olanarin hesabinda
+--    // toplam 5 000 000 mi var ve bu sartlardaki hesap sahiplerinin  sayisi 16 mi oldugunu sorgulayin.
+
+select count (account_type) as account_count,sum(balance)
+from tp_account
+where id<3000 and account_type='SAVING';
+
 
 select *
-from tp_state
-where id=88;
+from tp_account
+where "id"<30000 and account_type ='SAVING' and balance = 50000;
 
-delete from tp_state
-where id=88;
 
-update tp_state 
-Set name = 'yozgat'
-where id = 88;
 
-update tp_state
-set &quot;name&quot; = 'deneme'
-where id = 15;
 
-insert into tp_state values (88,'Ankara', 1);
-------------------tc0402-----------------------------------
---id=201, login=DB ,password_hash= abc123, first_name= Ali ,last_name=Adiguzel ,
---activated = true, created_by= Veli  //
- 
-select *
-from jhi_user;
 
-select *
+
+--  //2-jhi_user tablosunda  first_name de isimleri nin bastan ikinci harfi 'a ve son harfi e  olanlarin acticated
+--    //--coloumn u da sadece false created by da 10 tane anonymousUser kullanici oldugunu bulan kodu yaziniz
+
+select count(created_by)
 from jhi_user
-where &quot;id&quot;=661;
-
-insert into jhi_user (&quot;id&quot;,&quot;login&quot;,password_hash,first_name,last_name,activated,created_by)
-            values  (661,'manisa','abc23','Ali','Adiguzel',true,'Veli');
-            
-delete from jhi_user
-where id=661;
-
--------------------------tc0403-------------------------------------
-
-select *
-from tp_country
-
-select *
-from tp_country
-where &quot;id&quot;=1788;
-
-insert into tp_country values (1788,'japonya');
-
-delete from tp_country
-where id = 1788;
-
------------------ us_08 ------------------
-
-select *
-from jhi_persistent_audit_event
-WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-select *
-from jhi_persistent_audit_evt_data;
-
-select event_type
-from jhi_persistent_audit_event
-WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-select account_type,count (account_type) as total_account_type, avg   (balance) 
-from tp_account
-group by account_type
-ORDER BY avg (balance)  DESC
-LIMIT 1;
+where first_name like '_a%e' and activated='false' and created_by='anonymousUser';
 
 
-SELECT * 
-FROM jhi_persistent_audit_event
-WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE';
 
-UPDATE jhi_persistent_audit_event
-SET event_type = 'HATA'
-WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE'
 
-SELECT * 
-FROM jhi_persistent_audit_event
-WHERE event_id&gt;44500 and principal ='group8user' and event_type !='AUTHENTICATION_SUCCESS';
 
-SELECT *
-from jhi_persistent_audit_evt_data
-where value ='Bad credentials' and event_id = 56196;
 
-select account_type, count (account_type) as account_count, avg (balance) 
-from tp_account
-group by account_type
-order by avg (balance)  DESC
-Limit 1;</console>
+--//- 3--jhi_user tablosundan last_modified_by column nun 'ad' ile bas. yada son harfi 'n',e,a' ile bitmis    olan ilk 5
+--    // --kisinin last_name lerini
+--    //--TeamTryCatch olarak update ediniz ve last_name lerin TeamTryCatch oldunugunu veriye ediniz
+
+select last_name
+from jhi_user
+where last_name='TeamTryCatch' and  last_modified_by like 'ad%' and id<2740
+limit 5;
+
+  
+ update jhi_user 
+ set last_name='TeamTryCatch'
+ where last_modified_by like 'ad%' and id<2740;
+
+
+ 
+ 
+ 
+ update jhi_user 
+ set last_name='TeamTryCatch'
+ where last_modified_by in (select last_modified_by 
+                        from jhi_user
+                        where last_modified_by like 'ad%' or last_modified_by like '%n'
+                        limit 5)
+                        RETURNING last_modified_by;]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
