@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class MetadataOrnek {
+public class MetadataMethodsOrnek {
 
 
     String userDataQuery = "SELECT * FROM " + ConfigurationReader.getProperty("usersTableName");
