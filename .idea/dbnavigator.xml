@@ -25,67 +25,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, column, function" />
+        <schema name="pg_catalog" object-types="function, table, view" />
+        <schema name="public" object-types="sequence, function, table, index, column, dataset trigger, view, constraint" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[-- // 1--tp_account tablosunda id 3000 den kucuk  kisilerin account_type sadece saving olanarin hesabinda
---    // toplam 5 000 000 mi var ve bu sartlardaki hesap sahiplerinin  sayisi 16 mi oldugunu sorgulayin.
-
-select count (account_type) as account_count,sum(balance)
-from tp_account
-where id<3000 and account_type='SAVING';
-
-
-select *
-from tp_account
-where "id"<30000 and account_type ='SAVING' and balance = 50000;
-
-
-
-
-
-
---  //2-jhi_user tablosunda  first_name de isimleri nin bastan ikinci harfi 'a ve son harfi e  olanlarin acticated
---    //--coloumn u da sadece false created by da 10 tane anonymousUser kullanici oldugunu bulan kodu yaziniz
-
-select count(created_by)
-from jhi_user
-where first_name like '_a%e' and activated='false' and created_by='anonymousUser';
-
-
-
-
-
-
---//- 3--jhi_user tablosundan last_modified_by column nun 'ad' ile bas. yada son harfi 'n',e,a' ile bitmis    olan ilk 5
---    // --kisinin last_name lerini
---    //--TeamTryCatch olarak update ediniz ve last_name lerin TeamTryCatch oldunugunu veriye ediniz
-
-select last_name
-from jhi_user
-where last_name='TeamTryCatch' and  last_modified_by like 'ad%' and id<2740
-limit 5;
-
-  
- update jhi_user 
- set last_name='TeamTryCatch'
- where last_modified_by like 'ad%' and id<2740;
-
-
- 
- 
- 
- update jhi_user 
- set last_name='TeamTryCatch'
- where last_modified_by in (select last_modified_by 
-                        from jhi_user
-                        where last_modified_by like 'ad%' or last_modified_by like '%n'
-                        limit 5)
-                        RETURNING last_modified_by;]]></console>
+      <console name="GMIBANK" type="STANDARD" schema="" session="Main"><![CDATA[select *
+from jhi_user;]]></console>
     </connection>
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -97,6 +45,9 @@ limit 5;
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155" />
     <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
