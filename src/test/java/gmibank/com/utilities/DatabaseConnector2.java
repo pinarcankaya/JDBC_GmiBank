@@ -16,7 +16,7 @@ public class DatabaseConnector2 {
     private static Statement statement;
     private static ResultSet resultSet;
     private static ResultSetMetaData metaData;
-    private static PreparedStatement preparedStatement;//update ve delete burayla oluyor
+    private static PreparedStatement preparedStatement;//insert,update ve delete icin
 
     public static ResultSet getResultSet(String query) {
 

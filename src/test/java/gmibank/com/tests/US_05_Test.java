@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class US05_Test {
+public class US_05_Test {
 
     @Test //TC0501  AC_0501= Those whose authority_name is ROLE_ADMIN must have 'admin' in their login name.
            // (authority_name'i ROLE_ADMIN olanlarin login isminde de 'admin' ifadesi bulunmalidir)
