@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite 1" verbose="1">  <!--birden cok test kalibi kullanmak icin  adi ve sayisi   -->
+    <test name="smoke Test Suite">  <!--hangi tur test oldugu yazilir  -->
+        <classes>
+            <class name="gmibank.com.tests.US_01_Test"></class>  <!--test edilecek class ismi  -->
+        </classes>
+    </test>
+</suite>
