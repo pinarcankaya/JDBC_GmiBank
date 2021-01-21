@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="UTF-8" />
+      <charset value="windows-1254" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -24,109 +24,29 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="function, view, table" />
-        <schema name="public" object-types="function, sequence, view, table, column" />
+      <connection connection-id="00c68fc7-d1f4-4963-b6f3-7d98e0d999dc">
+        <schema name="trycatch" object-types="column, view, procedure, table, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main">----------tc0401-------------------------
-        select *
-        from tp_state;
-
-        select *
-        from tp_state
-        where id=88;
-
-        delete from tp_state
-        where id=88;
-
-        update tp_state
-        Set name = 'yozgat'
-        where id = 88;
-
-        update tp_state
-        set &quot;name&quot; = 'deneme'
-        where id = 15;
-
-        insert into tp_state values (88,'Ankara', 1);
-        ------------------tc0402-----------------------------------
-        --id=201, login=DB ,password_hash= abc123, first_name= Ali ,last_name=Adiguzel ,
-        --activated = true, created_by= Veli  //
-
-        select *
-        from jhi_user;
-
-        select *
-        from jhi_user
-        where &quot;id&quot;=661;
-
-        insert into jhi_user (&quot;id&quot;,&quot;login&quot;,password_hash,first_name,last_name,activated,created_by)
-        values  (661,'manisa','abc23','Ali','Adiguzel',true,'Veli');
-
-        delete from jhi_user
-        where id=661;
-
-        -------------------------tc0403-------------------------------------
-
-        select *
-        from tp_country
-
-        select *
-        from tp_country
-        where &quot;id&quot;=1788;
-
-        insert into tp_country values (1788,'japonya');
-
-        delete from tp_country
-        where id = 1788;
-
-        ----------------- us_08 ------------------
-
-        select *
-        from jhi_persistent_audit_event
-        WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-        select *
-        from jhi_persistent_audit_evt_data;
-
-        select event_type
-        from jhi_persistent_audit_event
-        WHERE event_id &gt; 44500 and principal = 'group8user' and event_type = 'AUTHENTICATION_FAILURE';
-
-        select account_type,count (account_type) as total_account_type, avg   (balance)
-        from tp_account
-        group by account_type
-        ORDER BY avg (balance)  DESC
-        LIMIT 1;
-
-
-        SELECT *
-        FROM jhi_persistent_audit_event
-        WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE';
-
-        UPDATE jhi_persistent_audit_event
-        SET event_type = 'HATA'
-        WHERE event_id&gt;44500 and principal ='group8user' and event_type ='AUTHENTICATION_FAILURE'
-
-        SELECT *
-        FROM jhi_persistent_audit_event
-        WHERE event_id&gt;44500 and principal ='group8user' and event_type !='AUTHENTICATION_SUCCESS';
-
-        SELECT *
-        from jhi_persistent_audit_evt_data
-        where value ='Bad credentials' and event_id = 56196;
-
-        select account_type, count (account_type) as account_count, avg (balance)
-        from tp_account
-        group by account_type
-        order by avg (balance)  DESC
-        Limit 1;</console>
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[sysdate function
+Returns date and time;
+Select sysdate From dual;]]></console>
     </connection>
-    <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+    <connection id="00c68fc7-d1f4-4963-b6f3-7d98e0d999dc">
+      <console name="trycatch" type="STANDARD" schema="trycatch" session="Main"><![CDATA[select * from categories
+
+select * from products
+
+select product_name,category_name,count(product_id)
+from products 
+join categories on products.category_id = categories.category_id
+where category_name = 'Seafood']]></console>
+    </connection>
+    <connection id="ff40756c-6cfd-48f1-a435-60fba807ef86">
+      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -134,7 +54,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155" />
-    <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3" />
+    <connection id="00c68fc7-d1f4-4963-b6f3-7d98e0d999dc" />
+    <connection id="ff40756c-6cfd-48f1-a435-60fba807ef86" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -245,23 +166,106 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="7f5c6769-99cb-48ad-aa92-a0679f5d7ee3" active="true">
+      <connection id="00c68fc7-d1f4-4963-b6f3-7d98e0d999dc" active="true">
         <database>
-          <name value="Connection" />
+          <name value="trycatch" />
           <description value="" />
-          <database-type value="POSTGRES" />
+          <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
+          <database-version value="8.0" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
           <host value="localhost" />
-          <port value="5432" />
-          <database value="postgres" />
+          <port value="3306" />
+          <database value="trycatch" />
           <type value="USER_PASSWORD" />
-          <user value="" />
-          <deprecated-pwd value="" />
+          <user value="myuser" />
+          <deprecated-pwd value="ZGVuZW1lMSE=" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="false" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="true" />
+          <environment-type value="default" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter use-master-settings="true">
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+      <connection id="ff40756c-6cfd-48f1-a435-60fba807ef86" active="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="MYSQL" />
+          <config-type value="BASIC" />
+          <database-version value="8.0" />
+          <driver-source value="BUILTIN" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="localhost" />
+          <port value="3306" />
+          <database value="mysql" />
+          <type value="USER_PASSWORD" />
+          <user value="root" />
+          <deprecated-pwd value="TXlzcWwuMDAyNQ==" />
         </database>
         <properties>
           <auto-commit value="false" />
