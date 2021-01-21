@@ -1,11 +1,6 @@
 package gmibank.com.utilities;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 
 import java.util.ArrayList;
@@ -18,15 +13,15 @@ public class ReusableMethods {
 
 
     //==========Return a list of string given a list of Web Element====////
-    public static List<String> getElementsText(List<WebElement> list) {
-        List<String> elemTexts = new ArrayList<>();
-        for (WebElement el : list) {
-            if (!el.getText().isEmpty()) {
-                elemTexts.add(el.getText());
-            }
-        }
-        return elemTexts;
-    }
+//    public static List<String> getElementsText(List<WebElement> list) {
+//        List<String> elemTexts = new ArrayList<>();
+//        for (WebElement el : list) {
+//            if (!el.getText().isEmpty()) {
+//                elemTexts.add(el.getText());
+//            }
+//        }
+//        return elemTexts;
+//    }
 
 
     // ===== RONDOM DATA === //

@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class DatabaseConnector {
 
-    private static final String dbusername = ConfigurationReader.getProperty("username");
-    private static final String dbpassword = ConfigurationReader.getProperty("password");
-    private static final String connectionUrl = ConfigurationReader.getProperty("db_url");
+    private static final String dbusername = ConfigurationReader.getProperty("myusername");
+    private static final String dbpassword = ConfigurationReader.getProperty("mypassword");
+    private static final String connectionUrl = ConfigurationReader.getProperty("myUrl");
 
     private static Connection connection;
     private static Statement statement;
